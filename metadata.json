@@ -1,0 +1,5 @@
+{
+  "name": "Simple Raffle Planner v12",
+  "description": "A simple and beautiful raffle application for small parties. Set the number of slots, fill in participant details, and draw a winner with a fun animation.",
+  "requestFramePermissions": []
+}
