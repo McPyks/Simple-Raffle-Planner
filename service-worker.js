@@ -2,6 +2,7 @@ const CACHE_NAME = 'simple-raffle-v1';
 const URLS_TO_CACHE = [
   '/',
   'index.html',
+  '/icon.png',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap',
   'https://aistudiocdn.com/react@^19.2.0',

@@ -28,13 +28,6 @@ const RaffleSlot: React.FC<RaffleSlotProps> = ({ slot, onClick, isFullView }) =>
       className={`${baseClasses} ${backgroundClasses}`}
       onClick={() => onClick(slot.id)}
     >
-      {isFilled && slot.paid && (
-        <div className="absolute top-1 right-1 text-white text-opacity-90">
-          <svg xmlns="http://www.w3.org/2000/svg" className={isFullView ? "h-3 w-3" : "h-4 w-4"} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 12v-2" />
-          </svg>
-        </div>
-      )}
       {isFullView ? (
         <div className="font-medium select-none text-sm md:text-base">{slot.id}</div>
       ) : (

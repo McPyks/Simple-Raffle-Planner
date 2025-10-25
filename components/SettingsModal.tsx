@@ -1,4 +1,4 @@
-import React, { useRef, ChangeEvent } from 'react';
+import React from 'react';
 
 interface SettingsModalProps {
   boardTitle: string;
@@ -7,7 +7,7 @@ interface SettingsModalProps {
   currentTheme: string;
   onThemeChange: (theme: string) => void;
   onDownloadData: () => void;
-  onUploadData: (event: ChangeEvent<HTMLInputElement>) => void;
+  onShowImportModal: () => void;
   removalsLeft: number;
   onRemoveLicense: () => void;
 }
@@ -20,17 +20,12 @@ const themes = [
   { id: 'sunset', name: 'Sunset Glow', class: 'from-rose-800 to-gray-900' },
 ];
 
-const SettingsModal: React.FC<SettingsModalProps> = ({ boardTitle, onClose, onDelete, currentTheme, onThemeChange, onDownloadData, onUploadData, removalsLeft, onRemoveLicense }) => {
-  const uploadInputRef = useRef<HTMLInputElement>(null);
+const SettingsModal: React.FC<SettingsModalProps> = ({ boardTitle, onClose, onDelete, currentTheme, onThemeChange, onDownloadData, onShowImportModal, removalsLeft, onRemoveLicense }) => {
 
   const handleDeleteConfirm = () => {
     if (window.confirm(`Are you sure you want to permanently delete the "${boardTitle}" raffle board? This action cannot be undone.`)) {
       onDelete();
     }
-  };
-
-  const handleUploadClick = () => {
-    uploadInputRef.current?.click();
   };
 
   return (
@@ -77,22 +72,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ boardTitle, onClose, onDe
                     </svg>
                     <span>Download Data</span>
                 </button>
-                <input
-                    type="file"
-                    ref={uploadInputRef}
-                    onChange={onUploadData}
-                    className="hidden"
-                    accept="application/json"
-                />
                 <button
-                    onClick={handleUploadClick}
+                    onClick={onShowImportModal}
                     className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out flex items-center justify-center gap-2"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H5.5z" />
-                        <path d="M9 13.5V9m0 4.5l-2.5-2.5M9 13.5L11.5 11" />
+                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                     </svg>
-                    <span>Upload Data</span>
+                    <span>Import Data</span>
                 </button>
             </div>
         </div>

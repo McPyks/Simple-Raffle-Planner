@@ -4,6 +4,7 @@ interface LicenseModalProps {
   onSubmit: (key: string) => void;
   status: 'idle' | 'loading' | 'error';
   error: string;
+  details?: string;
 }
 
 const LoadingSpinner: React.FC = () => (
@@ -14,7 +15,7 @@ const LoadingSpinner: React.FC = () => (
 );
 
 
-const LicenseModal: React.FC<LicenseModalProps> = ({ onSubmit, status, error }) => {
+const LicenseModal: React.FC<LicenseModalProps> = ({ onSubmit, status, error, details }) => {
   const [licenseKey, setLicenseKey] = useState('');
 
   const handleLicenseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,19 @@ const LicenseModal: React.FC<LicenseModalProps> = ({ onSubmit, status, error }) 
           </div>
 
           {status === 'error' && (
-             <p className="text-red-400 text-sm mb-4 bg-red-900/30 py-2 px-3 rounded-md">{error}</p>
+             <div className="text-red-400 text-sm mb-4 bg-red-900/30 py-3 px-4 rounded-lg text-left">
+                <p className="font-semibold">{error}</p>
+                {details && (
+                    <div className="mt-2 pt-2 border-t border-red-400/30">
+                        <p className="text-red-300">
+                            <span className="font-medium">Activation Info:</span> {details}
+                        </p>
+                        <p className="text-xs text-red-400/80 mt-1">
+                            To use this key on a new device, please open the app on the device described above, go to Settings, and select "Deactivate This Device".
+                        </p>
+                    </div>
+                )}
+            </div>
           )}
 
           <button

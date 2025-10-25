@@ -1,11 +1,11 @@
-import React, { useRef, ChangeEvent } from 'react';
+import React from 'react';
 import { RaffleBoardType } from '../types';
 
 interface HomePageProps {
   boards: RaffleBoardType[];
   onSelectBoard: (id: string) => void;
   onCreateNew: () => void;
-  onUploadData: (event: ChangeEvent<HTMLInputElement>) => void;
+  onShowImportModal: () => void;
 }
 
 interface BoardCardProps {
@@ -41,12 +41,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, onSelect }) => {
   )
 }
 
-const HomePage: React.FC<HomePageProps> = ({ boards, onSelectBoard, onCreateNew, onUploadData }) => {
-  const uploadInputRef = useRef<HTMLInputElement>(null);
-
-  const handleUploadClick = () => {
-    uploadInputRef.current?.click();
-  };
+const HomePage: React.FC<HomePageProps> = ({ boards, onSelectBoard, onCreateNew, onShowImportModal }) => {
   
   return (
     <div className="max-w-4xl mx-auto">
@@ -71,22 +66,15 @@ const HomePage: React.FC<HomePageProps> = ({ boards, onSelectBoard, onCreateNew,
               >
                 Create Your First Raffle
               </button>
-               <input
-                    type="file"
-                    ref={uploadInputRef}
-                    onChange={onUploadData}
-                    className="hidden"
-                    accept="application/json"
-                />
                 <button
-                    onClick={handleUploadClick}
+                    onClick={onShowImportModal}
                     className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out w-full sm:w-auto flex items-center justify-center gap-2"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H5.5z" />
-                        <path d="M9 13.5V9m0 4.5l-2.5-2.5M9 13.5L11.5 11" />
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                     </svg>
-                    <span>Upload Data</span>
+                    <span>Import Data</span>
                 </button>
           </div>
         </div>

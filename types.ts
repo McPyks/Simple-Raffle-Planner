@@ -14,4 +14,5 @@ export interface RaffleBoardType {
   slots: RaffleSlotType[];
   currency: 'USD' | 'EUR';
   slotPrice: number;
+  prizeImage?: string;
 }
